@@ -8,7 +8,7 @@ namespace GaspromDiagnostics
 {
     public class Object
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public float Distance { get; set; }
         public float Angle { get; set; }

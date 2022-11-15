@@ -27,8 +27,24 @@
             <Button x:Name="btnClear" Content="Сброс" Width="150" Margin="8"></Button>
         </StackPanel>
 
-        <!-- Таблица объектов -->
-        <DataGrid Grid.Row="1" Grid.RowSpan="2" x:Name="objectsGrid" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+        <!-- ListView Таблица объектов -->
+        <ListView Grid.Column="0" Grid.Row="1" x:Name="objectList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" />
+                    <GridViewColumn Header="Название" />
+                    <GridViewColumn Header="гориз.коорд." />
+                    <GridViewColumn Header="Верт.коорд." />
+                    <GridViewColumn Header="Ширина" />
+                    <GridViewColumn Header="Высота" />
+                    <GridViewColumn Header="Дефект" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+
+        <!-- DataGrid Таблица объектов -->
+        <DataGrid Grid.Column="0" Grid.Row="2" x:Name="objectsGrid" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
     RowBackground="LightGray" AlternatingRowBackground="White" ItemsSource="{DynamicResource ResourceKey=objects}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding Path=id}" Width="auto" />
@@ -42,9 +58,9 @@
             <!-- удалить по окончанию. Начало -->
             <DataGrid.Resources>
                 <col:ArrayList x:Key="objects">
-                    <local:Object id="1" Name="Коррозия" Distance="2" Angle="7" Width="3" Heigth="2" IsDefect="true" />
-                    <local:Object id="2" Name="Верт.шов" Distance="5" Angle="7" Width="0" Heigth="4" IsDefect="False" />
-                    <local:Object id="3" Name="Гор.шов" Distance="5" Angle="1" Width="4" Heigth="0" IsDefect="False" />
+                    <local:Object Id="1" Name="Коррозия" Distance="2" Angle="7" Width="3" Heigth="2" IsDefect="true" />
+                    <local:Object Id="2" Name="Верт.шов" Distance="5" Angle="7" Width="0" Heigth="4" IsDefect="False" />
+                    <local:Object Id="3" Name="Гор.шов" Distance="5" Angle="1" Width="4" Heigth="0" IsDefect="False" />
                 </col:ArrayList>
             </DataGrid.Resources>
             <!-- удалить по окончанию. Конец -->
