@@ -1,4 +1,5 @@
-﻿using GaspromDiagnostics.ViewModel;
+﻿using GaspromDiagnostics.Services;
+using GaspromDiagnostics.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,10 @@ namespace GaspromDiagnostics
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new DataManageVM();
+            DataContext = new DataManageVM(
+                new DefaultDialogService(),
+                new CsvFileService()
+                );
 
             //objects = new List<Object>
             //{

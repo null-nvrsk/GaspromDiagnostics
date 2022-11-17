@@ -1,19 +1,22 @@
 ﻿using GaspromDiagnostics.Model;
+using GaspromDiagnostics.Services;
 using GaspromDiagnostics.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GaspromDiagnostics.ViewModel
 {
     public class DataManageVM : INotifyPropertyChanged
     {
+        Object selectedObject;
+
+        IFileService fileService;
+        IDialogService dialogService;
+
         // все объекты
-        private List<Object> allObjects = DataWorker.GetAllObjects();
+        private List<Object> allObjects;
         public List<Object> AllObjects
         {
             get { return allObjects; }
@@ -52,6 +55,39 @@ namespace GaspromDiagnostics.ViewModel
         }
         #endregion
 
+        #region COMMANDS TO IMPORT/EXPORT FILES
+
+        // команда открытия файла
+        private RelayCommand openCsvFileCommand;
+        public RelayCommand OpenCsvFileCommand
+        {
+            get
+            {
+                return openCsvFileCommand ??
+                  (openCsvFileCommand = new RelayCommand(obj =>
+                  {
+                      try
+                      {
+                          if (dialogService.OpenFileDialog() == true)
+                          {
+                              var loadedObjects = fileService.Open(dialogService.FilePath);
+                              AllObjects.Clear();
+                              AllObjects.AddRange(loadedObjects);
+
+                              dialogService.ShowMessage("Файл открыт");
+                          }
+                      }
+                      catch (Exception ex)
+                      {
+                          dialogService.ShowMessage(ex.Message);
+                      }
+                  }));
+            }
+        }
+
+
+        #endregion
+
         #region METHODS TO OPEN/EDIT WINDOW
         // Методы открытия окон
         private void OpenAddObjectWindowMethod()
@@ -75,6 +111,13 @@ namespace GaspromDiagnostics.ViewModel
         }
         #endregion
 
+        public DataManageVM(IDialogService dialogService, IFileService fileService)
+        {
+            this.dialogService = dialogService;
+            this.fileService = fileService;
+
+            allObjects = DataWorker.GetAllObjects();
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

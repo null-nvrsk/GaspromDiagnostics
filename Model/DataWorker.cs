@@ -20,6 +20,23 @@ namespace GaspromDiagnostics.Model
             }
         }
 
+        // Перезаписываем все объекты
+        public static void RewriteAllObjects(List<Object> objects)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // удаляем старые объекты
+                db.Objects.RemoveRange(db.Objects);
+                db.SaveChanges();
+
+                // Загружаем новые объекты
+                foreach (Object obj in objects)
+                {
+                    db.Objects.Add(obj);
+                }
+            }
+        }
+
         // создать объекты
         public static void CreateObject(string name, float distance, float angle,
             float width, float heigth, bool isDefect)
