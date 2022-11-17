@@ -15,16 +15,28 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="2*" MinHeight="150"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- Панель -->
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
-            <Button x:Name="btnLoad" Content="Загрузить" Width="150" Margin="8" Click="btnLoad_Click"></Button>
-            <Button x:Name="btnSave" Content="Сохранить" Width="150" Margin="8" Click="btnSave_Click"></Button>
-            <Button x:Name="btnClear" Content="Сброс" Width="150" Margin="8"></Button>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnLoad" Command="{Binding }" 
+                     Content="Загрузить" Padding="10 0" Margin="5" />
+            <Button x:Name="btnSave" Command="{Binding }"
+                    Content="Сохранить" Padding="10 0" Margin="5" />
+            <Button x:Name="btnClear" Command="{Binding }" 
+                    Content="Сброс" Padding="10 0" Margin="5" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="btnAddObject" Command="{Binding OpenAddNewObjectWnd}"
+                    Content="Добавить объект" Padding="10 0" Margin="5" />
+            <Button x:Name="btnEditObject" Command="{Binding OpenEditObjectWnd}" 
+                     Content="Редактировать объект" Padding="10 0" Margin="5" />
+            <Button x:Name="btnDelObject" Command="{Binding }" 
+                     Content="Удалить объект" Padding="10 0" Margin="5" />
         </StackPanel>
 
         <!-- ListView Таблица объектов -->
