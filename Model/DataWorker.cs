@@ -34,6 +34,7 @@ namespace GaspromDiagnostics.Model
                 {
                     db.Objects.Add(obj);
                 }
+                db.SaveChanges();
             }
         }
 

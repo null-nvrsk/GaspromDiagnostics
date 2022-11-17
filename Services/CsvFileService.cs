@@ -11,7 +11,7 @@ namespace GaspromDiagnostics.Services
             List<Object> objects = new List<Object>();
             using (var reader = new StreamReader(filename))
             {
-
+                int counter = 0;
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
@@ -27,7 +27,7 @@ namespace GaspromDiagnostics.Services
                         obj.Width = Convert.ToSingle(values[3]);
                         obj.Heigth = Convert.ToSingle(values[4]);
                         obj.IsDefect = (values[5] == "yes");
-
+                        obj.Id = ++counter;
                         objects.Add(obj);
                     }
                     catch (Exception) { }
