@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace GaspromDiagnostics.ViewModel
 {
-    public class DataManageVM : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
         Object selectedObject;
 
@@ -111,22 +111,12 @@ namespace GaspromDiagnostics.ViewModel
         }
         #endregion
 
-        public DataManageVM(IDialogService dialogService, IFileService fileService)
+        public MainViewModel(IDialogService dialogService, IFileService fileService)
         {
             this.dialogService = dialogService;
             this.fileService = fileService;
 
             allObjects = DataWorker.GetAllObjects();
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
     }
 }

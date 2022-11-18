@@ -28,7 +28,7 @@ namespace GaspromDiagnostics
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new DataManageVM(
+            DataContext = new MainViewModel(
                 new DefaultDialogService(),
                 new CsvFileService()
                 );
