@@ -73,8 +73,8 @@ namespace GaspromDiagnostics.ViewModel
                               var loadedObjects = fileService.Open(dialogService.FilePath);
                               AllObjects.Clear();
                               AllObjects.AddRange(loadedObjects);
-
-                              dialogService.ShowMessage("Файл открыт");
+                              
+                              dialogService.ShowMessage($"Загружено {AllObjects.Count} объектов");
                           }
                       }
                       catch (Exception ex)

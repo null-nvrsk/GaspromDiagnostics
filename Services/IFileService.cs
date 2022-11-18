@@ -4,7 +4,7 @@ namespace GaspromDiagnostics.Services
 {
     public interface IFileService
     {
-        List<Object> Open(string filename);
+        List<Object>? Open(string filename);
         void Save(string filename, List<Object> objects);
     }
 }
