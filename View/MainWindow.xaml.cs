@@ -30,7 +30,7 @@ namespace GaspromDiagnostics
             InitializeComponent();
             DataContext = new MainViewModel(
                 new DefaultDialogService(),
-                new CsvFileService()
+                new DataFileService()
                 );
 
             //objects = new List<Object>

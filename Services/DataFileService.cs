@@ -5,7 +5,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace GaspromDiagnostics.Services
 {
-    public class CsvFileService : IFileService
+    public class DataFileService : IFileService
     {
         
         public List<Object>? Open(string filename)
