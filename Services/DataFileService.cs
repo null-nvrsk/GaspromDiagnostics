@@ -23,6 +23,21 @@ namespace GaspromDiagnostics.Services
             }
         }
 
+        public void Save(string filename, List<Object> objects)
+        {
+            string ext = Path.GetExtension(filename);
+            switch (ext)
+            {
+                case ".csv":
+                    SaveCsvFile(filename, objects);
+                    break;
+                case ".xls":
+                case ".xlsx":
+                    SaveExcelFile(filename, objects);
+                    break;
+            }
+        }
+
         private List<Object> OpenCsvFile(string filename)
         {
             List<Object> objects = new List<Object>();
@@ -85,14 +100,29 @@ namespace GaspromDiagnostics.Services
 
             return objects;
         }
-        public void Save(string filename, List<Object> objects)
+
+        private void SaveCsvFile(string filename, List<Object> objects)
         {
             using StreamWriter writer = new StreamWriter(filename, false);
+            writer.WriteLine("Name;Distance;Angle;Width;Heigth;IsDefect");
             foreach (Object obj in objects)
             {
-                string text = String.Join(';', obj);
-                writer.WriteLine(text);
+                string csvLine =
+                    obj.Name + ";" +
+                    obj.Distance + ";" +
+                    obj.Angle + ";" +
+                    obj.Width + ";" +
+                    obj.Heigth + ";" +
+                    (obj.IsDefect ? "yes" : "no");
+
+                writer.WriteLine(csvLine);
             }
+        }
+
+        private void SaveExcelFile(string filename, List<Object> objects)
+        {
+            // TODO: Реализовать выгрузку в Excel
+            System.Windows.MessageBox.Show($"выгрузка {objects.Count} объектов в Excel");
         }
     }
 }

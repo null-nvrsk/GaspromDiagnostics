@@ -57,14 +57,14 @@ namespace GaspromDiagnostics.ViewModel
 
         #region COMMANDS TO IMPORT/EXPORT FILES
 
-        // команда открытия файла
-        private RelayCommand openCsvFileCommand;
-        public RelayCommand OpenCsvFileCommand
+        // команда импорта из файла
+        private RelayCommand importFromFileCommand;
+        public RelayCommand ImportFromFileCommand
         {
             get
             {
-                return openCsvFileCommand ??
-                  (openCsvFileCommand = new RelayCommand(obj =>
+                return importFromFileCommand ??
+                  (importFromFileCommand = new RelayCommand(obj =>
                   {
                       try
                       {
@@ -85,6 +85,31 @@ namespace GaspromDiagnostics.ViewModel
             }
         }
 
+        // команда экспорта в файл
+        private RelayCommand exportToFileCommand;
+        public RelayCommand ExportToFileCommand
+        {
+            get
+            {
+                return exportToFileCommand ??
+                  (exportToFileCommand = new RelayCommand(obj =>
+                  {
+                      try
+                      {
+                          if (dialogService.SaveFileDialog() == true)
+                          {
+                              fileService.Save(dialogService.FilePath, AllObjects);
+
+                              dialogService.ShowMessage($"Выгружено {AllObjects.Count} объектов");
+                          }
+                      }
+                      catch (Exception ex)
+                      {
+                          dialogService.ShowMessage(ex.Message);
+                      }
+                  }));
+            }
+        }
 
         #endregion
 

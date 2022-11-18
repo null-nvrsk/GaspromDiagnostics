@@ -22,9 +22,9 @@
 
         <!-- Панель -->
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="btnLoad" Command="{Binding OpenCsvFileCommand}" 
+            <Button x:Name="btnLoad" Command="{Binding ImportFromFileCommand}" 
                      Content="Загрузить" Padding="10 0" Margin="5" />
-            <Button x:Name="btnSave" Command="{Binding }"
+            <Button x:Name="btnSave" Command="{Binding ExportToFileCommand}"
                     Content="Сохранить" Padding="10 0" Margin="5" />
             <Button x:Name="btnClear" Command="{Binding }" 
                     Content="Сброс" Padding="10 0" Margin="5" />
