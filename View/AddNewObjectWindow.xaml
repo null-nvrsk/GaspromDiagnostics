@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GaspromDiagnostics.View"
         mc:Ignorable="d"
-        Title="Add new object" Height="250" Width="300">
+        Title="Add new object" Height="250" Width="300"
+        Name="AddNewObjectWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -26,19 +27,32 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
+            
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox  Grid.Row="0" Grid.Column="1" Text="" Margin="4" />
+            <TextBox Name="NameBlock" Text="{Binding ObjectName}"
+                     Grid.Row="0" Grid.Column="1" Margin="4" />
+            
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Distance:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="" Margin="4" />
+            <TextBox Name="DistanceBlock" Text="{Binding ObjectDistance}"
+                Grid.Row="1" Grid.Column="1" Margin="4" />
+            
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text=""  Margin="4" />
+            <TextBox Name="AngleBlock" Text="{Binding ObjectAngle}"
+                Grid.Row="2" Grid.Column="1" Margin="4" />
+            
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Width:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="" Margin="4" />
+            <TextBox Name="WidthBlock" Text="{Binding ObjectWidth}"
+                Grid.Row="3" Grid.Column="1" Margin="4" />
+            
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Height:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text=""  Margin="4" />
-            <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{x:Null}" Content="Defected" VerticalAlignment="Center" Margin="4"/>
+            <TextBox Name="HeightBlock" Text="{Binding ObjectHeight}"
+                Grid.Row="4" Grid.Column="1" Margin="4" />
+
+            <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding ObjectIsDefect}"
+                      Content="Defected" VerticalAlignment="Center" Margin="4"/>
         </Grid>
 
-        <Button Grid.Row="1" Content="Add object" Width="150" Height="30"/>
+        <Button Grid.Row="1" Content="Add object" Width="150" Height="30"
+                Command="{Binding AddNewObject}" CommandParameter="{Binding ElementName=AddNewObjectWnd}"/>
     </Grid>
 </Window>

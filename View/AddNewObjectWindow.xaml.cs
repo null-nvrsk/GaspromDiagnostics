@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GaspromDiagnostics.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace GaspromDiagnostics.View
         public AddNewObjectWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

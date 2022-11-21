@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GaspromDiagnostics.ViewModel
 {
@@ -26,6 +28,59 @@ namespace GaspromDiagnostics.ViewModel
                 NotifyPropertyChanged("AllObjects");
             }
         }
+
+        // свойства для объекта
+        public int ObjectId { get; set; }
+        public string ObjectName { get; set; }
+        public float ObjectDistance { get; set; }
+        public float ObjectAngle { get; set; }
+        public float ObjectWidth { get; set; }
+        public float ObjectHeight { get; set; }
+        public bool ObjectIsDefect { get; set; }
+
+        public MainViewModel()
+        {
+            allObjects = DataWorker.GetAllObjects();
+        }
+
+        public MainViewModel(IDialogService dialogService, IFileService fileService)
+        {
+            this.dialogService = dialogService;
+            this.fileService = fileService;
+
+            allObjects = DataWorker.GetAllObjects();
+        }
+
+        #region ADD COMMANDS TO ADD
+
+        private RelayCommand addNewObject;
+        public RelayCommand AddNewObject
+        {
+            get
+            {
+                return addNewObject ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    string resultStr = "";
+                    if (ObjectName == null || ObjectName.Replace(" ", "").Length == 0)
+                    {
+                        SetRedBlockControl(wnd, "NameBlock");
+                    }
+                    else
+                    {
+                        DataWorker.CreateObject(ObjectName, ObjectDistance,
+                            ObjectAngle, ObjectWidth, ObjectHeight, ObjectIsDefect);
+                        UpdateDataView();
+                        //ShowMessageToUser(resultStr);
+                        SetNullValuesToProperties();
+                        wnd.Close();
+                    }
+                }
+                );
+            }
+        }
+
+        #endregion
 
         #region COMMANDS TO OPEN WINDOWS
         private RelayCommand openAddNewObjectWnd;
@@ -136,12 +191,42 @@ namespace GaspromDiagnostics.ViewModel
         }
         #endregion
 
-        public MainViewModel(IDialogService dialogService, IFileService fileService)
+        private void SetRedBlockControl(Window wnd, string blockName)
         {
-            this.dialogService = dialogService;
-            this.fileService = fileService;
-
-            allObjects = DataWorker.GetAllObjects();
+            Control block = wnd.FindName(blockName) as Control;
+            block.BorderBrush = Brushes.Red;
         }
+
+        #region UPDATE_VIEWS
+
+        private void SetNullValuesToProperties()
+        {
+            // для пользователя
+            ObjectId = 0;
+            ObjectName = null;
+            ObjectDistance = 0;
+            ObjectAngle = 0;
+            ObjectWidth = 0;
+            ObjectHeight = 0;
+            ObjectIsDefect = false;
+        }
+
+        private void UpdateDataView()
+        {
+            UpdateAllObjectsView();
+            //UpdateAllPositionsView();
+            //UpdateAllEmployeesView();
+        }
+
+        private void UpdateAllObjectsView()
+        {
+            AllObjects = DataWorker.GetAllObjects();
+            MainWindow.AllObjectsView.ItemsSource = null;
+            MainWindow.AllObjectsView.Items.Clear();
+            MainWindow.AllObjectsView.ItemsSource = AllObjects;
+            MainWindow.AllObjectsView.Items.Refresh();
+        }
+
+        #endregion
     }
 }
