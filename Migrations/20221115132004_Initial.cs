@@ -20,7 +20,7 @@ namespace GaspromDiagnostics.Migrations
                     Distance = table.Column<float>(type: "REAL", nullable: false),
                     Angle = table.Column<float>(type: "REAL", nullable: false),
                     Width = table.Column<float>(type: "REAL", nullable: false),
-                    Heigth = table.Column<float>(type: "REAL", nullable: false),
+                    Height = table.Column<float>(type: "REAL", nullable: false),
                     IsDefect = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

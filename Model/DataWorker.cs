@@ -40,16 +40,17 @@ namespace GaspromDiagnostics.Model
 
         // создать объекты
         public static void CreateObject(string name, float distance, float angle,
-            float width, float heigth, bool isDefect)
+            float width, float height, bool isDefect)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 Object newObject = new Object
                 {
                     Name = name,
+                    Distance = distance,
                     Angle = angle,
                     Width = width,
-                    Heigth = heigth,
+                    Height = height,
                     IsDefect = isDefect
                 };
                 db.Objects.Add(newObject);
@@ -69,7 +70,7 @@ namespace GaspromDiagnostics.Model
 
         // редактирование объекта
         public static void EditObject(Object oldObject, string newName, float newDistance, 
-            float newAngle, float newWidth, float newHeigth, bool newIsDefect)
+            float newAngle, float newWidth, float newHeight, bool newIsDefect)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -80,7 +81,7 @@ namespace GaspromDiagnostics.Model
                     newObject.Distance = newDistance;
                     newObject.Angle = newAngle;
                     newObject.Width = newWidth;
-                    newObject.Heigth = newHeigth;
+                    newObject.Height = newHeight;
                     newObject.IsDefect = newIsDefect;
                     db.SaveChanges();
                 }

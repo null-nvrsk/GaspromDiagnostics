@@ -57,9 +57,8 @@ namespace GaspromDiagnostics.Services
                             Distance = Convert.ToSingle(values[1]),
                             Angle = Convert.ToSingle(values[2]),
                             Width = Convert.ToSingle(values[3]),
-                            Heigth = Convert.ToSingle(values[4]),
-                            IsDefect = (values[5] == "yes"),
-                            Id = ++counter
+                            Height = Convert.ToSingle(values[4]),
+                            IsDefect = (values[5] == "yes")
                         };
                         objects.Add(obj);
                     }
@@ -89,9 +88,8 @@ namespace GaspromDiagnostics.Services
                         Distance = Convert.ToSingle(sheet.Cells[row, 2]),
                         Angle = Convert.ToSingle(sheet.Cells[row, 3]),
                         Width = Convert.ToSingle(sheet.Cells[row, 4]),
-                        Heigth = Convert.ToSingle(sheet.Cells[row, 5]),
-                        IsDefect = (sheet.Cells[row, 6].ToString() == "yes"),
-                        Id = ++counter
+                        Height = Convert.ToSingle(sheet.Cells[row, 5]),
+                        IsDefect = (sheet.Cells[row, 6].ToString() == "yes")
                     };
                     objects.Add(obj);
                     
@@ -104,7 +102,7 @@ namespace GaspromDiagnostics.Services
         private void SaveCsvFile(string filename, List<Object> objects)
         {
             using StreamWriter writer = new StreamWriter(filename, false);
-            writer.WriteLine("Name;Distance;Angle;Width;Heigth;IsDefect");
+            writer.WriteLine("Name;Distance;Angle;Width;Height;IsDefect");
             foreach (Object obj in objects)
             {
                 string csvLine =
@@ -112,7 +110,7 @@ namespace GaspromDiagnostics.Services
                     obj.Distance + ";" +
                     obj.Angle + ";" +
                     obj.Width + ";" +
-                    obj.Heigth + ";" +
+                    obj.Height + ";" +
                     (obj.IsDefect ? "yes" : "no");
 
                 writer.WriteLine(csvLine);

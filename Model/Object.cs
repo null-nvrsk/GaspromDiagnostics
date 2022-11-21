@@ -13,8 +13,7 @@ namespace GaspromDiagnostics
         public float Distance { get; set; }
         public float Angle { get; set; }
         public float Width { get; set; }
-        public float Heigth { get; set; }
+        public float Height { get; set; }
         public bool IsDefect { get; set; }
-
     }
 }

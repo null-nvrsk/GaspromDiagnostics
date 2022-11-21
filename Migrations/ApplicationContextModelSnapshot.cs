@@ -28,7 +28,7 @@ namespace GaspromDiagnostics.Migrations
                     b.Property<float>("Distance")
                         .HasColumnType("REAL");
 
-                    b.Property<float>("Heigth")
+                    b.Property<float>("Height")
                         .HasColumnType("REAL");
 
                     b.Property<bool>("IsDefect")
