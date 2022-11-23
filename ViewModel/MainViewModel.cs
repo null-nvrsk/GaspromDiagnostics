@@ -2,9 +2,8 @@
 using GaspromDiagnostics.Services;
 using GaspromDiagnostics.View;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -12,8 +11,6 @@ namespace GaspromDiagnostics.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        Object selectedObject;
-
         IFileService fileService;
         IDialogService dialogService;
 
@@ -93,14 +90,14 @@ namespace GaspromDiagnostics.ViewModel
             {
                 return editObject ?? new RelayCommand(obj =>
                 {
-                    Window window = obj as Window;
+                    Window wnd = obj as Window;
 
                     if (SelectedObject != null)
                     {
                         DataWorker.EditObject(SelectedObject, ObjectName, ObjectDistance, ObjectAngle, ObjectWidth, ObjectHeight, ObjectIsDefect);
                         UpdateDataView();
                         SetNullValuesToProperties();
-                        window.Close();
+                        wnd.Close();
                     }
                 });
             }
