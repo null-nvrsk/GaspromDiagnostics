@@ -50,7 +50,7 @@ namespace GaspromDiagnostics.ViewModel
             allObjects = DataWorker.GetAllObjects();
         }
 
-        #region COMMANDS TO ADD
+        #region COMMAND TO ADD
 
         private RelayCommand addNewObject;
         public RelayCommand AddNewObject
@@ -81,7 +81,7 @@ namespace GaspromDiagnostics.ViewModel
 
         #endregion
 
-        #region COMMANDS TO EDIT
+        #region COMMAND TO EDIT
 
         private RelayCommand editObject;
         public RelayCommand EditObject
@@ -99,6 +99,28 @@ namespace GaspromDiagnostics.ViewModel
                         SetNullValuesToProperties();
                         wnd.Close();
                     }
+                });
+            }
+        }
+
+        #endregion
+
+        #region COMMAND TO DELETE
+
+        private RelayCommand deleteObject;
+        public RelayCommand DeleteObject
+        {
+            get
+            {
+                return deleteObject ?? new RelayCommand(obj =>
+                {
+                    if (SelectedObject != null)
+                    {
+                        DataWorker.DeleteObject(SelectedObject);
+                        UpdateDataView();
+                    }
+                    // обновление
+                    // SetNullValuesToProperties();
                 });
             }
         }

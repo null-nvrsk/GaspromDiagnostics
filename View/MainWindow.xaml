@@ -35,7 +35,7 @@
                     Content="Добавить объект" Padding="10 0" Margin="5" />
             <Button x:Name="btnEditObject" Command="{Binding OpenEditObjectWnd}" 
                      Content="Редактировать объект" Padding="10 0" Margin="5" />
-            <Button x:Name="btnDelObject" Command="{Binding }" 
+            <Button x:Name="btnDelObject" Command="{Binding DeleteObject}" 
                      Content="Удалить объект" Padding="10 0" Margin="5" />
         </StackPanel>
 
