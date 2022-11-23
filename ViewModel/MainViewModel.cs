@@ -30,13 +30,15 @@ namespace GaspromDiagnostics.ViewModel
         }
 
         // свойства для объекта
-        public int ObjectId { get; set; }
-        public string ObjectName { get; set; }
-        public float ObjectDistance { get; set; }
-        public float ObjectAngle { get; set; }
-        public float ObjectWidth { get; set; }
-        public float ObjectHeight { get; set; }
-        public bool ObjectIsDefect { get; set; }
+        public static int ObjectId { get; set; }
+        public static string ObjectName { get; set; }
+        public static float ObjectDistance { get; set; }
+        public static float ObjectAngle { get; set; }
+        public static float ObjectWidth { get; set; }
+        public static float ObjectHeight { get; set; }
+        public static bool ObjectIsDefect { get; set; }
+
+        public static Object SelectedObject { get; set; }
 
         public MainViewModel()
         {
@@ -51,7 +53,7 @@ namespace GaspromDiagnostics.ViewModel
             allObjects = DataWorker.GetAllObjects();
         }
 
-        #region ADD COMMANDS TO ADD
+        #region COMMANDS TO ADD
 
         private RelayCommand addNewObject;
         public RelayCommand AddNewObject
@@ -82,6 +84,30 @@ namespace GaspromDiagnostics.ViewModel
 
         #endregion
 
+        #region COMMANDS TO EDIT
+
+        private RelayCommand editObject;
+        public RelayCommand EditObject
+        {
+            get
+            {
+                return editObject ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+
+                    if (SelectedObject != null)
+                    {
+                        DataWorker.EditObject(SelectedObject, ObjectName, ObjectDistance, ObjectAngle, ObjectWidth, ObjectHeight, ObjectIsDefect);
+                        UpdateDataView();
+                        SetNullValuesToProperties();
+                        window.Close();
+                    }
+                });
+            }
+        }
+
+        #endregion
+
         #region COMMANDS TO OPEN WINDOWS
         private RelayCommand openAddNewObjectWnd;
         public RelayCommand OpenAddNewObjectWnd
@@ -103,7 +129,10 @@ namespace GaspromDiagnostics.ViewModel
             {
                 return openEditObjectWnd ?? new RelayCommand(obj =>
                 {
-                    OpenEditObjectWindowMethod();
+                    if(SelectedObject != null)
+                    {
+                        OpenEditObjectWindowMethod(SelectedObject);
+                    }                    
                 }
                 );
             }
@@ -177,9 +206,9 @@ namespace GaspromDiagnostics.ViewModel
         }
 
         // Окно редактирования
-        private void OpenEditObjectWindowMethod()
+        private void OpenEditObjectWindowMethod(Object obj)
         {
-            EditObjectWindow editObjectWindow = new EditObjectWindow();
+            EditObjectWindow editObjectWindow = new EditObjectWindow(obj);
             SetCenterPositionAndOpen(editObjectWindow);
         }
 

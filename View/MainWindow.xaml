@@ -40,16 +40,16 @@
         </StackPanel>
 
         <!-- ListView Таблица объектов -->
-        <ListView Grid.Column="0" Grid.Row="1" x:Name="ViewAllObjects" ItemsSource="{Binding AllObjects}">
+        <ListView Grid.Column="0" Grid.Row="1" x:Name="ViewAllObjects" ItemsSource="{Binding AllObjects}" SelectedItem="{Binding SelectedObject}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="№" DisplayMemberBinding="{Binding Path=Id}" />
-                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="гориз.коорд." DisplayMemberBinding="{Binding Path=Distance}" />
-                    <GridViewColumn Header="Верт.коорд." DisplayMemberBinding="{Binding Path=Angle}" />
-                    <GridViewColumn Header="Ширина"  DisplayMemberBinding="{Binding Path=Width}" />
-                    <GridViewColumn Header="Высота" DisplayMemberBinding="{Binding Path=Height}" />
-                    <GridViewColumn Header="Дефект" DisplayMemberBinding="{Binding Path=IsDefect}" />
+                    <GridViewColumn Header="№" DisplayMemberBinding="{Binding Path=Id}" Width="auto" />
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Path=Name}" Width="auto" />
+                    <GridViewColumn Header="гориз.коорд." DisplayMemberBinding="{Binding Path=Distance}" Width="auto" />
+                    <GridViewColumn Header="Верт.коорд." DisplayMemberBinding="{Binding Path=Angle}" Width="auto" />
+                    <GridViewColumn Header="Ширина"  DisplayMemberBinding="{Binding Path=Width}" Width="auto" />
+                    <GridViewColumn Header="Высота" DisplayMemberBinding="{Binding Path=Height}" Width="auto" />
+                    <GridViewColumn Header="Дефект" DisplayMemberBinding="{Binding Path=IsDefect}" Width="auto" />
                 </GridView>
             </ListView.View>
         </ListView>

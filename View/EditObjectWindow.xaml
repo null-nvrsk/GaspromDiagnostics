@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Edit object"  Height="250" Width="300">
+        Title="Edit object"  Height="250" Width="300"
+        Name="EditObjectWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -26,18 +27,20 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox  Grid.Row="0" Grid.Column="1" Text="" Margin="4" />
+            <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding ObjectName}" Margin="4" />
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Distance:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="" Margin="4" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ObjectDistance}" Margin="4" />
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text=""  Margin="4" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ObjectAngle}" Margin="4" />
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Width:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="" Margin="4" />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ObjectWidth}" Margin="4" />
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Height:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text=""  Margin="4" />
-            <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{x:Null}" Content="Defected" VerticalAlignment="Center" Margin="4"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ObjectHeight}"  Margin="4" />
+            <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding ObjectIsDefect}" Content="Defected" VerticalAlignment="Center" Margin="4"/>
         </Grid>
 
-        <Button Grid.Row="1" Content="Save" Width="150" Height="30"/>
+        <Button Grid.Row="1" Content="Save" Width="150" Height="30"
+                Command="{Binding EditObject}"
+                CommandParameter="{Binding ElementName=EditObjectWnd}"/>
     </Grid>
 </Window>

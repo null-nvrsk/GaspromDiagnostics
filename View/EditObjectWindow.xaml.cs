@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GaspromDiagnostics.ViewModel;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GaspromDiagnostics.View
 {
@@ -19,9 +9,26 @@ namespace GaspromDiagnostics.View
     /// </summary>
     public partial class EditObjectWindow : Window
     {
-        public EditObjectWindow()
+        public EditObjectWindow(Object objectToEdit)
         {
             InitializeComponent();
+
+            DataContext = new MainViewModel();
+
+            MainViewModel.SelectedObject = objectToEdit;
+            MainViewModel.ObjectId = objectToEdit.Id;
+            MainViewModel.ObjectName = objectToEdit.Name;
+            MainViewModel.ObjectDistance = objectToEdit.Distance;
+            MainViewModel.ObjectAngle = objectToEdit.Angle;
+            MainViewModel.ObjectWidth = objectToEdit.Width;
+            MainViewModel.ObjectHeight = objectToEdit.Height;
+            MainViewModel.ObjectIsDefect = objectToEdit.IsDefect;
+        }
+
+        private void PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
