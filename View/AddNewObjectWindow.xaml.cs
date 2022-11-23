@@ -23,7 +23,15 @@ namespace GaspromDiagnostics.View
         public AddNewObjectWindow()
         {
             InitializeComponent();
+
             DataContext = new MainViewModel();
+            MainViewModel.ObjectId = 0;
+            MainViewModel.ObjectName = null;
+            MainViewModel.ObjectDistance = 0;
+            MainViewModel.ObjectAngle = 0;
+            MainViewModel.ObjectWidth = 0;
+            MainViewModel.ObjectHeight = 0;
+            MainViewModel.ObjectIsDefect = false;
         }
     }
 }
