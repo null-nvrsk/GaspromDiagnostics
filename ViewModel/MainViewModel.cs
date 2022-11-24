@@ -60,7 +60,6 @@ namespace GaspromDiagnostics.ViewModel
                 return addNewObject ?? new RelayCommand(obj =>
                 {
                     Window wnd = obj as Window;
-                    string resultStr = "";
                     if (ObjectName == null || ObjectName.Replace(" ", "").Length == 0)
                     {
                         SetRedBlockControl(wnd, "NameBlock");
@@ -69,8 +68,7 @@ namespace GaspromDiagnostics.ViewModel
                     {
                         DataWorker.CreateObject(ObjectName, ObjectDistance,
                             ObjectAngle, ObjectWidth, ObjectHeight, ObjectIsDefect);
-                        UpdateDataView();
-                        //ShowMessageToUser(resultStr);
+                        UpdateData();
                         SetNullValuesToProperties();
                         wnd.Close();
                     }
@@ -95,7 +93,7 @@ namespace GaspromDiagnostics.ViewModel
                     if (SelectedObject != null)
                     {
                         DataWorker.EditObject(SelectedObject, ObjectName, ObjectDistance, ObjectAngle, ObjectWidth, ObjectHeight, ObjectIsDefect);
-                        UpdateDataView();
+                        UpdateData();
                         SetNullValuesToProperties();
                         wnd.Close();
                     }
@@ -117,10 +115,10 @@ namespace GaspromDiagnostics.ViewModel
                     if (SelectedObject != null)
                     {
                         DataWorker.DeleteObject(SelectedObject);
-                        UpdateDataView();
+                        UpdateData();
                     }
-                    // обновление
-                    // SetNullValuesToProperties();
+
+                    SetNullValuesToProperties();
                 });
             }
         }
@@ -176,7 +174,8 @@ namespace GaspromDiagnostics.ViewModel
                               var loadedObjects = fileService.Open(dialogService.FilePath);
                               AllObjects.Clear();
                               AllObjects.AddRange(loadedObjects);
-                              
+                              RewriteData();
+
                               dialogService.ShowMessage($"Загружено {AllObjects.Count} объектов");
                           }
                       }
@@ -259,16 +258,20 @@ namespace GaspromDiagnostics.ViewModel
             ObjectIsDefect = false;
         }
 
-        private void UpdateDataView()
+        private void UpdateData()
         {
+            AllObjects = DataWorker.GetAllObjects();
             UpdateAllObjectsView();
-            //UpdateAllPositionsView();
-            //UpdateAllEmployeesView();
+        }
+
+        private void RewriteData()
+        {
+            DataWorker.RewriteAllObjects(AllObjects);
+            UpdateAllObjectsView();
         }
 
         private void UpdateAllObjectsView()
         {
-            AllObjects = DataWorker.GetAllObjects();
             MainWindow.AllObjectsView.ItemsSource = null;
             MainWindow.AllObjectsView.Items.Clear();
             MainWindow.AllObjectsView.ItemsSource = AllObjects;
