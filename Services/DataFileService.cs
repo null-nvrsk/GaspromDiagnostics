@@ -7,7 +7,6 @@ namespace GaspromDiagnostics.Services
 {
     public class DataFileService : IFileService
     {
-        
         public List<Object>? Open(string filename)
         {
             string ext = Path.GetExtension(filename);
